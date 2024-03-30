@@ -1,0 +1,35 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: ReverseRegistrarCCIP
+    network: fuji
+    source:
+      address: "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266"
+      abi: ReverseRegistrarCCIP
+      startBlock: 0
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ControllerChanged
+        - DefaultResolverChanged
+        - OwnershipTransferred
+        - ReverseClaimed
+      abis:
+        - name: ReverseRegistrarCCIP
+          file: ./abis/ReverseRegistrarCCIP.json
+      eventHandlers:
+        - event: ControllerChanged(indexed address,bool)
+          handler: handleControllerChanged
+        - event: DefaultResolverChanged(indexed address)
+          handler: handleDefaultResolverChanged
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: ReverseClaimed(indexed address,indexed bytes32)
+          handler: handleReverseClaimed
+      file: ./src/reverse-registrar-ccip.ts
