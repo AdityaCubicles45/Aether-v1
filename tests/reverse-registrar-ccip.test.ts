@@ -5,7 +5,7 @@ import {
   clearStore,
   beforeAll,
   afterAll
-} from "matchstick-as/assembly/index"
+} from "matchstick-as"
 import { Address, Bytes } from "@graphprotocol/graph-ts"
 import { ControllerChanged } from "../generated/schema"
 import { ControllerChanged as ControllerChangedEvent } from "../generated/ReverseRegistrarCCIP/ReverseRegistrarCCIP"
